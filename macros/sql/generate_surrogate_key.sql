@@ -1,4 +1,4 @@
-{%- macro generate_surrogate_key(field_list) -%}
+{%- macro generate_surrogate_key(field_list, field_delimiter='-') -%}
     {{ return(adapter.dispatch('generate_surrogate_key', 'dbt_utils')(field_list)) }}
 {% endmacro %}
 
@@ -19,7 +19,7 @@
     ) -%}
 
     {%- if not loop.last %}
-        {%- do fields.append("'-'") -%}
+        {%- do fields.append("field_delimiter") -%}
     {%- endif -%}
 
 {%- endfor -%}
